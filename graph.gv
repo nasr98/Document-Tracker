@@ -1,0 +1,27 @@
+// The Round Table
+digraph {
+	node [color=red shape=rectangle style=filled]
+	"8e1v"
+	node [color=red shape=circle style=filled]
+	"7cb1"
+	"8e1v" -> "7cb1"
+	node [color=red shape=rectangle style=filled]
+	"8e1v"
+	node [color=red shape=circle style=filled]
+	faa2
+	"8e1v" -> faa2
+	node [color=green shape=rectangle style=filled]
+	"8e8c"
+	node [color=green shape=circle style=filled]
+	"8e8c" -> "7cb1"
+	node [color=red shape=rectangle style=filled]
+	"8e9a"
+	node [color=red shape=circle style=filled]
+	"7cb1"
+	"8e9a" -> "7cb1"
+	node [color=red shape=rectangle style=filled]
+	"8e5c"
+	node [color=red shape=circle style=filled]
+	"7cb1"
+	"8e5c" -> "7cb1"
+}
