@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  version: 1.0.2
+  title: Swagger Home Work
+  description: Swagger Home Work APIs
+  contact:
+    email: wazahrani@tcc-ict.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: employee 
+    description: employee related calls.
+  - name: department 
+    description: department related calls.  
+   
+paths:
+  /department:
+    get:
+      tags: 
+        - department
+      summary: searches department
+      description: |
+        By passing in the appropriate options, you can search for
+        available department in the system
+      responses:
+        200 :
+          description: this is list of the department in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/department'
+        500 : 
+          $ref: '#/components/responses/500ApiError'
+      
+    post:
+      tags: 
+        - department
+      description: Creates a new department in the database
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/department'
+      responses:
+        201:
+          description: this department has been created.
+        500 : 
+          $ref: '#/components/responses/500ApiError'  
+          
+  /department/{departmentID}:
+    get:
+      tags: 
+        - department
+      description: department in the database
+      parameters: 
+       - $ref: '#/components/parameters/departmentID'
+      responses:
+        200:
+          description: this is list of the department in the system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/department'
+             
+        500:
+          $ref: '#/components/responses/500ApiError'  
+          
+  /employee:
+    get:
+      tags: 
+        - employee
+      summary: searches employee
+      description: |
+        By passing in the appropriate options, you can search for
+        available employee in the system
+      responses:
+        200 :
+          description: this is list of the employee in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/employee'
+        500 : 
+          $ref: '#/components/responses/500ApiError'
+      
+    post:
+     #security: 
+     #  - password:[write]
+      tags: 
+        - employee
+      description: Creates a new employee in the database
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employee'
+      responses:
+        201:
+          description: this employee has been created.
+        500 : 
+          $ref: '#/components/responses/500ApiError'  
+          
+  /employee/{employeeID}:
+    get:
+      tags: 
+        - employee
+      description: employee in the database
+      parameters: 
+       - $ref: '#/components/parameters/employeeID'
+      responses:
+        200:
+          description: this is list of the employee in the system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee'
+             
+        500:
+          $ref: '#/components/responses/500ApiError'    
+          
+  /empByDepartment/{departmentID}:
+    get:
+      tags: 
+        - employee
+      description: employee related to Department in the database
+      parameters: 
+       - $ref: '#/components/parameters/departmentID'
+      responses:
+        200:
+         description: this is list of the employee in the system
+         content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/employee'
+        500 : 
+          $ref: '#/components/responses/500ApiError'    
+          
+components:
+  #securitySchemes:
+   # password:
+    #  type: oauth2
+    #  flows:
+      #  password:
+       #   tokenUrl: 'https://example.com/oauth/token'
+       #   scopes:
+        #    write: allows modifying resources
+        #    read: allows reading resources
+  parameters:
+    employeeID:
+      in: path
+      name: employeeID
+      description: employee ID.
+      required: true
+      schema:
+        type: integer
+        example: 54
+        
+    departmentID:
+      in: path
+      name: departmentID
+      description: department ID.
+      required: true
+      schema:
+        type: integer
+        example: 54    
+ 
+  schemas:
+    employee:
+      type: object
+      required:
+        - employeeID 
+      properties:
+        employeeID:
+          type: integer
+          example: 1547
+        name:
+          type: string
+          example: waleed mohammed
+        jobID:
+          type: integer
+          example: 471  
+        phoneNumber:
+          type: integer
+          example: 0587458975 
+        email:
+          type: string
+          example: ahmad@911.gov.sa 
+        departmentID:
+          type: integer
+          example: 47 
+          
+    department:
+      type: object
+      required:
+        - departmentID 
+      properties:
+        departmentID:
+          type: integer
+          example: 01
+        departmentName:
+          type: string
+          example: Manar Unit      
+      
+  
+  responses:   
+    500ApiError:
+      description: this is an unexpected error .
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: string
+                example: 500
+              message:
+                type: string
+                example: this is an error .
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/waleed720/swagger-home_work/1.0.2
