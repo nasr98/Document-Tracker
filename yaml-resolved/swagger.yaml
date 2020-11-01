@@ -1,0 +1,260 @@
+openapi: 3.0.0
+info:
+  title: Swagger Home Work
+  description: Swagger Home Work APIs
+  contact:
+    email: wazahrani@tcc-ict.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.2
+servers:
+- url: https://virtserver.swaggerhub.com/waleed720/swagger-home_work/1.0.2
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: employee
+  description: employee related calls.
+- name: department
+  description: department related calls.
+paths:
+  /department:
+    get:
+      tags:
+      - department
+      summary: searches department
+      description: |
+        By passing in the appropriate options, you can search for
+        available department in the system
+      responses:
+        "200":
+          description: this is list of the department in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/department'
+        "500":
+          description: this is an unexpected error .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+    post:
+      tags:
+      - department
+      description: Creates a new department in the database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/department'
+      responses:
+        "201":
+          description: this department has been created.
+        "500":
+          description: this is an unexpected error .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+  /department/{departmentID}:
+    get:
+      tags:
+      - department
+      description: department in the database
+      parameters:
+      - name: departmentID
+        in: path
+        description: department ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 54
+      responses:
+        "200":
+          description: this is list of the department in the system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/department'
+        "500":
+          description: this is an unexpected error .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+  /employee:
+    get:
+      tags:
+      - employee
+      summary: searches employee
+      description: |
+        By passing in the appropriate options, you can search for
+        available employee in the system
+      responses:
+        "200":
+          description: this is list of the employee in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/employee'
+        "500":
+          description: this is an unexpected error .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+    post:
+      tags:
+      - employee
+      description: Creates a new employee in the database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employee'
+      responses:
+        "201":
+          description: this employee has been created.
+        "500":
+          description: this is an unexpected error .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+  /employee/{employeeID}:
+    get:
+      tags:
+      - employee
+      description: employee in the database
+      parameters:
+      - name: employeeID
+        in: path
+        description: employee ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 54
+      responses:
+        "200":
+          description: this is list of the employee in the system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee'
+        "500":
+          description: this is an unexpected error .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+  /empByDepartment/{departmentID}:
+    get:
+      tags:
+      - employee
+      description: employee related to Department in the database
+      parameters:
+      - name: departmentID
+        in: path
+        description: department ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 54
+      responses:
+        "200":
+          description: this is list of the employee in the system
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/employee'
+        "500":
+          description: this is an unexpected error .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_500'
+components:
+  schemas:
+    employee:
+      required:
+      - employeeID
+      type: object
+      properties:
+        employeeID:
+          type: integer
+          example: 1547
+        name:
+          type: string
+          example: waleed mohammed
+        jobID:
+          type: integer
+          example: 471
+        phoneNumber:
+          type: integer
+          example: 587458975
+        email:
+          type: string
+          example: ahmad@911.gov.sa
+        departmentID:
+          type: integer
+          example: 47
+    department:
+      required:
+      - departmentID
+      type: object
+      properties:
+        departmentID:
+          type: integer
+          example: 1
+        departmentName:
+          type: string
+          example: Manar Unit
+    inline_response_500:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "500"
+        message:
+          type: string
+          example: this is an error .
+  responses:
+    "500ApiError":
+      description: this is an unexpected error .
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_500'
+  parameters:
+    employeeID:
+      name: employeeID
+      in: path
+      description: employee ID.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+        example: 54
+    departmentID:
+      name: departmentID
+      in: path
+      description: department ID.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+        example: 54
