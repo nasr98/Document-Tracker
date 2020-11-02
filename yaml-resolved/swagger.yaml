@@ -1,260 +1,56 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  title: Swagger Home Work
-  description: Swagger Home Work APIs
-  contact:
-    email: wazahrani@tcc-ict.com
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.2
+  title: OpenWeather
+  description: Open Weather Map API
+  version: "0.1"
 servers:
-- url: https://virtserver.swaggerhub.com/waleed720/swagger-home_work/1.0.2
-  description: SwaggerHub API Auto Mocking
-tags:
-- name: employee
-  description: employee related calls.
-- name: department
-  description: department related calls.
+- url: http://api.openweathermap.org
 paths:
-  /department:
+  /data/2.5/find:
     get:
-      tags:
-      - department
-      summary: searches department
-      description: |
-        By passing in the appropriate options, you can search for
-        available department in the system
-      responses:
-        "200":
-          description: this is list of the department in the system
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/department'
-        "500":
-          description: this is an unexpected error .
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_500'
-    post:
-      tags:
-      - department
-      description: Creates a new department in the database
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/department'
-      responses:
-        "201":
-          description: this department has been created.
-        "500":
-          description: this is an unexpected error .
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_500'
-  /department/{departmentID}:
-    get:
-      tags:
-      - department
-      description: department in the database
+      description: Auto generated using Swagger Inspector
       parameters:
-      - name: departmentID
-        in: path
-        description: department ID.
-        required: true
-        style: simple
-        explode: false
+      - name: q
+        in: query
+        required: false
+        style: form
+        explode: true
         schema:
-          type: integer
-          example: 54
-      responses:
-        "200":
-          description: this is list of the department in the system
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/department'
-        "500":
-          description: this is an unexpected error .
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_500'
-  /employee:
-    get:
-      tags:
-      - employee
-      summary: searches employee
-      description: |
-        By passing in the appropriate options, you can search for
-        available employee in the system
-      responses:
-        "200":
-          description: this is list of the employee in the system
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/employee'
-        "500":
-          description: this is an unexpected error .
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_500'
-    post:
-      tags:
-      - employee
-      description: Creates a new employee in the database
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/employee'
-      responses:
-        "201":
-          description: this employee has been created.
-        "500":
-          description: this is an unexpected error .
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_500'
-  /employee/{employeeID}:
-    get:
-      tags:
-      - employee
-      description: employee in the database
-      parameters:
-      - name: employeeID
-        in: path
-        description: employee ID.
-        required: true
-        style: simple
-        explode: false
+          type: string
+        example: q=portland,us
+      - name: appid
+        in: query
+        required: false
+        style: form
+        explode: true
         schema:
-          type: integer
-          example: 54
-      responses:
-        "200":
-          description: this is list of the employee in the system
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/employee'
-        "500":
-          description: this is an unexpected error .
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_500'
-  /empByDepartment/{departmentID}:
-    get:
-      tags:
-      - employee
-      description: employee related to Department in the database
-      parameters:
-      - name: departmentID
-        in: path
-        description: department ID.
-        required: true
-        style: simple
-        explode: false
+          type: string
+        example: appid=5eeb2db6a0fbf956e6915df00b2b365d
+      - name: units
+        in: query
+        required: false
+        style: form
+        explode: true
         schema:
-          type: integer
-          example: 54
+          type: string
+        example: units=imperial
       responses:
         "200":
-          description: this is list of the employee in the system
+          description: Auto generated using Swagger Inspector
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/employee'
-        "500":
-          description: this is an unexpected error .
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/inline_response_500'
-components:
-  schemas:
-    employee:
-      required:
-      - employeeID
-      type: object
-      properties:
-        employeeID:
-          type: integer
-          example: 1547
-        name:
-          type: string
-          example: waleed mohammed
-        jobID:
-          type: integer
-          example: 471
-        phoneNumber:
-          type: integer
-          example: 587458975
-        email:
-          type: string
-          example: ahmad@911.gov.sa
-        departmentID:
-          type: integer
-          example: 47
-    department:
-      required:
-      - departmentID
-      type: object
-      properties:
-        departmentID:
-          type: integer
-          example: 1
-        departmentName:
-          type: string
-          example: Manar Unit
-    inline_response_500:
-      type: object
-      properties:
-        statusCode:
-          type: string
-          example: "500"
-        message:
-          type: string
-          example: this is an error .
-  responses:
-    "500ApiError":
-      description: this is an unexpected error .
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_response_500'
-  parameters:
-    employeeID:
-      name: employeeID
-      in: path
-      description: employee ID.
-      required: true
-      style: simple
-      explode: false
-      schema:
-        type: integer
-        example: 54
-    departmentID:
-      name: departmentID
-      in: path
-      description: department ID.
-      required: true
-      style: simple
-      explode: false
-      schema:
-        type: integer
-        example: 54
+                type: string
+              examples:
+                "0":
+                  value: '{"message":"accurate","cod":"200","count":1,"list":[{"id":2643743,"name":"London","coord":{"lat":51.5085,"lon":-0.1258},"main":{"temp":68.97,"pressure":1015,"humidity":82,"temp_min":64.4,"temp_max":73.4},"dt":1527774600,"wind":{"speed":8.05,"deg":70},"sys":{"country":"GB"},"rain":null,"snow":null,"clouds":{"all":75},"weather":[{"id":701,"main":"Mist","description":"mist","icon":"50d"},{"id":201,"main":"Thunderstorm","description":"thunderstorm
+                    with rain","icon":"11d"},{"id":721,"main":"Haze","description":"haze","icon":"50d"},{"id":522,"main":"Rain","description":"heavy
+                    intensity shower rain","icon":"09d"}]}]}'
+                "1":
+                  value: '{"message":"accurate","cod":"200","count":5,"list":[{"id":4720131,"name":"Portland","coord":{"lat":27.8768,"lon":-97.3234},"main":{"temp":84.2,"pressure":1011,"humidity":70,"temp_min":82.4,"temp_max":86},"dt":1527774960,"wind":{"speed":17.22,"deg":180,"gust":10.8},"sys":{"country":"US"},"rain":null,"snow":null,"clouds":{"all":40},"weather":[{"id":802,"main":"Clouds","description":"scattered
+                    clouds","icon":"03d"}]},{"id":4975802,"name":"Portland","coord":{"lat":43.661,"lon":-70.2549},"main":{"temp":67.55,"pressure":1018,"humidity":41,"temp_min":60.8,"temp_max":75.2},"dt":1527774660,"wind":{"speed":3.36},"sys":{"country":"US"},"rain":null,"snow":null,"clouds":{"all":1},"weather":[{"id":800,"main":"Clear","description":"sky
+                    is clear","icon":"01d"}]},{"id":5746545,"name":"Portland","coord":{"lat":45.5202,"lon":-122.6742},"main":{"temp":50.43,"pressure":1013,"humidity":66,"temp_min":48.2,"temp_max":53.6},"dt":1527774960,"wind":{"speed":3.15,"deg":246.503},"sys":{"country":"US"},"rain":null,"snow":null,"clouds":{"all":75},"weather":[{"id":803,"main":"Clouds","description":"broken
+                    clouds","icon":"04d"}]},{"id":4650946,"name":"Portland","coord":{"lat":36.5817,"lon":-86.5164},"main":{"temp":78.76,"pressure":1014,"humidity":78,"temp_min":77,"temp_max":80.6},"dt":1527774960,"wind":{"speed":9.17,"deg":220},"sys":{"country":"US"},"rain":null,"snow":null,"clouds":{"all":1},"weather":[{"id":800,"main":"Clear","description":"sky
+                    is clear","icon":"01d"}]},{"id":4925037,"name":"Portland","coord":{"lat":40.4345,"lon":-84.9778},"main":{"temp":75.96,"pressure":1010,"humidity":83,"temp_min":73.4,"temp_max":78.8},"dt":1527774540,"wind":{"speed":11.41,"deg":190},"sys":{"country":"US"},"rain":null,"snow":null,"clouds":{"all":40},"weather":[{"id":802,"main":"Clouds","description":"scattered
+                    clouds","icon":"03d"}]}]}'
+components: {}
